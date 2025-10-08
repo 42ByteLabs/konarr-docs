@@ -1,0 +1,5 @@
+[book]
+authors = ["42ByteLabs", "GeekMasher"]
+language = "en"
+src = "src"
+title = "Konarr Documentation"
