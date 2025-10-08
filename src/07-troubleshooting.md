@@ -71,7 +71,9 @@ This guide helps resolve common issues with Konarr server and agent deployments.
 **Problem**: UI shows blank page or loading errors.
 
 **Solutions**:
+
 1. Check frontend configuration:
+
    ```yaml
    # konarr.yml
    server:
@@ -80,6 +82,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    ```
 
 2. Verify reverse proxy (if used):
+
    ```nginx
    # nginx example
    location / {
@@ -100,7 +103,9 @@ This guide helps resolve common issues with Konarr server and agent deployments.
 **Error**: `Authentication failed` or `Invalid token`
 
 **Solutions**:
+
 1. Verify agent token:
+
    ```bash
    # Check server for current token
    curl -s http://localhost:9000/api/health
@@ -110,6 +115,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    ```
 
 2. Generate new token:
+
    ```bash
    # Access server admin UI
    # Navigate to Settings > Agent Token
@@ -117,6 +123,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    ```
 
 3. Check token format:
+
    ```bash
    # Token should be base64-encoded string
    # Verify no extra whitespace or newlines
@@ -128,7 +135,9 @@ This guide helps resolve common issues with Konarr server and agent deployments.
 **Problem**: Agent cannot install or find security tools.
 
 **Solutions**:
+
 1. Manual tool installation:
+
    ```bash
    # Install Syft
    curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
@@ -141,6 +150,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    ```
 
 2. Check tool paths:
+
    ```bash
    # Verify tools are accessible
    which syft
@@ -154,6 +164,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    ```
 
 3. Configure toolcache path:
+
    ```yaml
    # konarr.yml
    agent:
@@ -168,7 +179,9 @@ This guide helps resolve common issues with Konarr server and agent deployments.
 **Error**: `Cannot connect to Docker daemon`
 
 **Solutions**:
+
 1. Check Docker socket permissions:
+
    ```bash
    # Verify socket exists and is accessible
    ls -la /var/run/docker.sock
@@ -179,6 +192,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    ```
 
 2. Container socket mounting:
+
    ```bash
    # Ensure socket is properly mounted
    docker run -v /var/run/docker.sock:/var/run/docker.sock \
@@ -186,6 +200,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    ```
 
 3. Docker daemon status:
+
    ```bash
    # Check Docker daemon is running
    systemctl status docker
@@ -197,7 +212,9 @@ This guide helps resolve common issues with Konarr server and agent deployments.
 **Problem**: Agent cannot reach Konarr server.
 
 **Solutions**:
+
 1. Test connectivity:
+
    ```bash
    # Test server reachability
    curl -v http://konarr-server:9000/api/health
@@ -207,6 +224,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    ```
 
 2. Firewall configuration:
+
    ```bash
    # Check firewall rules
    sudo ufw status
@@ -217,6 +235,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    ```
 
 3. Network configuration:
+
    ```bash
    # Check network interfaces
    ip addr show
@@ -232,7 +251,9 @@ This guide helps resolve common issues with Konarr server and agent deployments.
 **Problem**: Cannot pull Konarr container images.
 
 **Solutions**:
+
 1. Check image availability:
+
    ```bash
    # List available tags
    curl -s https://api.github.com/repos/42ByteLabs/konarr/packages/container/konarr/versions
@@ -242,6 +263,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    ```
 
 2. Authentication for private registries:
+
    ```bash
    # Login to GitHub Container Registry
    echo $GITHUB_TOKEN | docker login ghcr.io -u USERNAME --password-stdin
@@ -252,7 +274,9 @@ This guide helps resolve common issues with Konarr server and agent deployments.
 **Problem**: Containers exit immediately or crash.
 
 **Solutions**:
+
 1. Check container logs:
+
    ```bash
    # View container logs
    docker logs konarr-server
@@ -263,6 +287,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    ```
 
 2. Verify volume mounts:
+
    ```bash
    # Check mount points exist and are writable
    ls -la /host/data
@@ -273,6 +298,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    ```
 
 3. Resource constraints:
+
    ```bash
    # Check available resources
    docker stats
@@ -287,7 +313,9 @@ This guide helps resolve common issues with Konarr server and agent deployments.
 **Problem**: Server or agent consuming excessive memory.
 
 **Solutions**:
+
 1. Monitor memory usage:
+
    ```bash
    # Check process memory
    ps aux | grep konarr
@@ -297,6 +325,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    ```
 
 2. Configure resource limits:
+
    ```yaml
    # docker-compose.yml
    services:
@@ -310,6 +339,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    ```
 
 3. Database optimization:
+
    ```bash
    # Vacuum SQLite database
    sqlite3 /data/konarr.db "VACUUM;"
@@ -323,7 +353,9 @@ This guide helps resolve common issues with Konarr server and agent deployments.
 **Problem**: Agent takes too long to generate SBOMs.
 
 **Solutions**:
+
 1. Check scanner performance:
+
    ```bash
    # Test individual tools
    time syft nginx:latest
@@ -331,6 +363,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    ```
 
 2. Optimize container caching:
+
    ```bash
    # Pre-pull base images
    docker pull alpine:latest
@@ -340,6 +373,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    ```
 
 3. Adjust scanning scope:
+
    ```yaml
    # konarr.yml - reduce scan scope
    agent:
@@ -354,6 +388,7 @@ This guide helps resolve common issues with Konarr server and agent deployments.
 ### Enable Debug Logging
 
 **Server Debug Mode**:
+
 ```bash
 # Environment variable
 export RUST_LOG=debug
@@ -363,12 +398,10 @@ echo "log_level = 'debug'" >> konarr.yml
 ```
 
 **Agent Debug Mode**:
-```bash
-**Debug Agent:**
 
 ```bash
+# Debug Agent
 konarr-cli --debug agent --docker-socket /var/run/docker.sock
-```
 
 # Debug environment
 export KONARR_LOG_LEVEL=debug
@@ -377,6 +410,7 @@ export KONARR_LOG_LEVEL=debug
 ### API Debugging
 
 **Test API Endpoints**:
+
 ```bash
 # Health check
 curl -v http://localhost:9000/api/health
@@ -396,6 +430,7 @@ curl -X POST \
 ### Database Debugging
 
 **Query Database Directly**:
+
 ```bash
 # Connect to SQLite database
 sqlite3 /data/konarr.db
@@ -676,6 +711,7 @@ env | grep KONARR_ | sort
 ### Log Collection
 
 When seeking support, collect these logs:
+
 ```bash
 # Server logs
 docker logs konarr-server > server.log 2>&1
