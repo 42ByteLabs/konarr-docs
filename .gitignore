@@ -1,3 +1,7 @@
 
 book/
-
+.DS_Store
+*.tar.gz
+*.zip
+/mdbook
+.vercel
