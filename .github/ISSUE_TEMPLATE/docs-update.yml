@@ -1,0 +1,33 @@
+name: Documentation Update
+description: Documentation Update
+title: "[Docs]: "
+labels: ["documentation", "enhancement"]
+assignees:
+  - GeekMasher
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to suggest documentation improvements!
+  - type: textarea
+    id: documentation-update
+    attributes:
+      label: What documentation needs to be updated or improved?
+      description: Please describe what documentation is missing, incorrect, or could be improved.
+      placeholder: Tell us what documentation needs attention!
+      value: "The documentation could be improved by..."
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this documentation update?
+      options:
+        - Low - Nice to have improvement
+        - Medium - Important for user experience
+        - High - Critical missing information
+      default: 0
+    validations:
+      required: true

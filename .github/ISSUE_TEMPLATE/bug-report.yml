@@ -1,0 +1,73 @@
+name: Documentation Issue
+description: Report incorrect, broken, or confusing documentation
+title: "[Bug]: "
+labels: ["documentation", "bug", "triage"]
+assignees:
+  - GeekMasher 
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping us improve the documentation! Please report any incorrect information, broken links, confusing instructions, or missing details.
+  - type: textarea
+    id: documentation-issue
+    attributes:
+      label: What documentation issue did you find?
+      description: Please describe what's wrong, incorrect, or confusing in the documentation.
+      placeholder: Tell us what documentation problem you encountered!
+      value: "I found an issue with the documentation where..."
+    validations:
+      required: true
+  - type: textarea
+    id: page-location
+    attributes:
+      label: Page or Section Location
+      description: Which documentation page or section has the issue? Please provide the URL or page title.
+      placeholder: "e.g., Installation Guide > Server Setup, or https://docs.example.com/server-config"
+    validations:
+      required: true
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Type of Documentation Issue
+      description: What kind of documentation problem is this?
+      options:
+        - Incorrect information
+        - Broken links or images
+        - Confusing or unclear instructions
+        - Missing information
+        - Outdated content
+        - Formatting or display issues
+        - Code examples don't work
+      default: 0
+    validations:
+      required: true
+  - type: textarea
+    id: expected-content
+    attributes:
+      label: What should the documentation say instead?
+      description: Please describe what you expected to find or what the correct information should be.
+      placeholder: "The documentation should explain..."
+  - type: dropdown
+    id: documentation-section
+    attributes:
+      label: Documentation Section
+      description: Which part of the documentation is affected?
+      multiple: true
+      options:
+        - Introduction
+        - Installation & Setup
+        - Server Configuration
+        - Agent Configuration
+        - CLI Usage
+        - Web Interface
+        - API Documentation
+        - Security
+        - Troubleshooting
+        - Docker/Container guides
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other context, screenshots, or information that would help us understand and fix the issue.
+      placeholder: "Additional details that might help..."
