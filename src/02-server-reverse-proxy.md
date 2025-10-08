@@ -306,6 +306,7 @@ location ~ ^/api/(snapshots|upload) {
 ```
 
 **Traefik:**
+
 ```yaml
 # Add to service labels
 - "traefik.http.middlewares.ratelimit.ratelimit.burst=20"
@@ -318,6 +319,7 @@ location ~ ^/api/(snapshots|upload) {
 Restrict access to specific IP ranges:
 
 **Nginx:**
+
 ```nginx
 # Allow specific networks
 allow 10.0.0.0/8;
@@ -331,6 +333,7 @@ deny all;
 Add basic authentication at the proxy level:
 
 **Nginx:**
+
 ```nginx
 location / {
     auth_basic "Konarr Access";
@@ -346,6 +349,7 @@ location / {
 Configure detailed logging for monitoring:
 
 **Nginx:**
+
 ```nginx
 log_format konarr_format '$remote_addr - $remote_user [$time_local] '
                          '"$request" $status $body_bytes_sent '

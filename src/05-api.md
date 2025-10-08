@@ -311,7 +311,6 @@ konarr-cli scan --image alpine:latest --output results.json
 # List available tools
 konarr-cli scan --list
 ```
-```
 
 ---
 
