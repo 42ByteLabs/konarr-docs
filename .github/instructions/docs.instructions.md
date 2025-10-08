@@ -51,6 +51,11 @@ If the source code changes, update the documentation accordingly.
 - Follow the existing style and tone of the documentation.
 - Use `container` instead of Docker or Podman when referring to the technology in general.
 
+## Testing
+
+- Build the documentation locally using MDBook to ensure it renders correctly.
+- Verify that all links and references are accurate.
+
 ## Linting
 
 Run the following command to lint the documentation:
