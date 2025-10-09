@@ -15,6 +15,7 @@
   - [Agent Configuration](./03-agent.md)
     - [CLI Usage](./03-usage-cli.md)
     - [Agent Configuration Details](./03-configuration-agent.md)
+  - [Scanning Tools](./03-tools.md)
   - [Web Interface](./04-usage-web.md)
 - [API Documentation](./05-api.md)
 - [Security](./06-security.md)
