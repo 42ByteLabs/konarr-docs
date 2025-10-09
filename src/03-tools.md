@@ -111,9 +111,9 @@ The agent can automatically install missing tools:
 export KONARR_AGENT_TOOL_AUTO_INSTALL=true
 
 # Manual tool installation
-konarr-cli tools install syft
-konarr-cli tools install grype  
-konarr-cli tools install trivy
+konarr-cli tools install --tool syft
+konarr-cli tools install --tool grype
+konarr-cli tools install --tool trivy
 ```
 
 ### Checking Installed Tools
@@ -234,7 +234,7 @@ If tools fail to install automatically:
 konarr-cli tools list
 
 # Manual tool install
-konarr-cli tools install syft
+konarr-cli tools install --tool syft
 
 # Check tool cache
 ls -la /usr/local/toolcache/
