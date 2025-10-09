@@ -180,35 +180,13 @@ Tools are stored in the following locations:
 
 ### Advanced Configuration
 
-Configure tool-specific settings in `konarr.yml`:
+Configure agent tool settings in `konarr.yml`:
 
 ```yaml
 agent:
   tool: "syft"
   tool_auto_install: true
   tool_auto_update: false
-  toolcache_path: "/usr/local/toolcache"
-
-tools:
-  syft:
-    version: "v0.96.0"
-    config:
-      exclude_paths:
-        - "/tmp"
-        - "/var/cache"
-      cataloger_scope: "all-layers"
-  
-  grype:
-    version: "v0.74.0"
-    config:
-      fail_on_severity: "high"
-      ignore_fixed: false
-  
-  trivy:
-    version: "v0.48.0"
-    config:
-      skip_db_update: false
-      timeout: "10m"
 ```
 
 ## Tool Comparison
