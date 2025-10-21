@@ -130,6 +130,48 @@ This guide helps resolve common issues with Konarr server and agent deployments.
    echo -n "$KONARR_AGENT_TOKEN" | wc -c
    ```
 
+### Web UI Login Issues
+
+**Problem**: Cannot log in to the web interface or forgot password.
+
+**Solutions**:
+
+1. Reset user password using the CLI:
+
+   ```bash
+   # Interactive password reset
+   konarr-cli database user
+   
+   # Follow the prompts:
+   # - Enter the username
+   # - Enter the new password
+   # - Select the role (Admin/User)
+   ```
+
+2. Create a new admin user if locked out:
+
+   ```bash
+   # Create emergency admin account
+   konarr-cli --database-url /data/konarr.db database user
+   
+   # When prompted:
+   # Username: emergency-admin
+   # Password: [enter secure password]
+   # Role: Admin
+   ```
+
+3. For container deployments:
+
+   ```bash
+   # Access container and reset password
+   docker exec -it konarr-server konarr-cli database user
+   
+   # Or with volume-mounted database
+   konarr-cli --database-url /path/to/konarr.db database user
+   ```
+
+**Note**: The `database user` command can both create new users and reset passwords for existing users. See the [CLI Usage Guide](03-usage-cli.md#user-management) for more details.
+
 ### Tool Installation Problems
 
 **Problem**: Agent cannot install or find security tools.

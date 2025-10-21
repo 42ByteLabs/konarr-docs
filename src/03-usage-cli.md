@@ -191,6 +191,55 @@ konarr-cli projects create \
   --description "Production web application"
 ```
 
+### User Management
+
+#### Create or Reset User Password
+
+The `database user` command allows you to create new users or reset passwords for existing users. This is an interactive command that prompts for user information:
+
+```bash
+konarr-cli database user
+```
+
+The command will prompt you for:
+
+1. **Username**: The username for the user account
+2. **Password**: The new password (hidden input)
+3. **Role**: User role - either `Admin` or `User`
+
+**Behavior:**
+
+- If the username already exists, the command will update the user's password and role
+- If the username doesn't exist, a new user account will be created
+- This command is useful for password recovery when users forget their credentials
+
+**Example session:**
+
+```bash
+$ konarr-cli database user
+Username: admin
+Password: ********
+Role: 
+> Admin
+  User
+User updated successfully
+```
+
+**Non-interactive usage:**
+
+For automated setups or scripts, you can provide the database path:
+
+```bash
+konarr-cli --database-url /data/konarr.db database user
+```
+
+**Common use cases:**
+
+- **Initial admin account creation**: Set up the first admin user after installation
+- **Password reset**: Reset a forgotten user password
+- **Role update**: Change a user's role from User to Admin or vice versa
+- **Emergency access**: Regain access when locked out of the web interface
+
 ## Advanced Usage
 
 ### Configuration File
