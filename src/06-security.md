@@ -53,6 +53,20 @@ docker service update --env-add KONARR_AGENT_TOKEN="new-token-here" konarr-agent
 - **Session-Based**: Web interface uses session-based authentication
 - **Admin Access**: Server settings and sensitive operations require admin privileges
 - **Session Security**: Sessions are secured with appropriate timeout settings
+- **Password Management**: Users can update their passwords with strength validation through the profile page
+- **Session Monitoring**: Users can view active sessions in their profile
+
+#### User Password Security
+
+Users should follow password best practices:
+
+- **Minimum Length**: Passwords must be at least 8 characters
+- **Complexity**: Use a mix of uppercase, lowercase, numbers, and symbols
+- **Uniqueness**: Don't reuse passwords from other services
+- **Regular Updates**: Change passwords periodically
+- **Password Strength**: The profile page provides real-time password strength feedback
+
+To change your password, visit the [User Profile page](04-usage-web.md#user-profile-management) in the web interface.
 
 ## Transport Security
 

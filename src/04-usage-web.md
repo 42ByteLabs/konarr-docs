@@ -67,15 +67,74 @@ The Konarr web interface is organized into several main sections:
   - Search and filtering by CVE, component, or description
   - Bulk operations for alert management
 
+### 👤 User Profile
+
+- **Purpose**: Personal account management and settings
+- **Contents**:
+  - View account details (username, role, status)
+  - Password management with strength validation
+  - Active session management
+  - Account creation date and last login information
+- **Access**: Available to all authenticated users
+
 ### ⚙️ Settings / Admin
 
 - **Purpose**: Server-level configuration and administration (admin-only)
 - **Contents**:
-  - User and token management
+  - User and token management with enhanced UI
   - Agent authentication settings
   - Server configuration
   - System health and statistics
 - **Access**: Requires admin privileges
+
+---
+
+## User Profile Management
+
+### Accessing Your Profile
+
+Navigate to your profile page from the navigation menu:
+
+- **Location**: User menu in the top navigation bar
+- **Access**: Available to all authenticated users
+- **URL**: `/profile`
+
+### Profile Information
+
+View and manage your account details:
+
+- **Username**: Your unique account identifier
+- **Role**: Your assigned role (Admin or User)
+- **Status**: Account state (Active, Inactive, Suspended)
+- **Created At**: Account creation timestamp
+- **Last Login**: Most recent login time
+- **Avatar**: Profile picture (if configured)
+
+### Password Management
+
+Change your password securely through the profile page:
+
+1. **Enter Current Password**: Authenticate the change request
+2. **Set New Password**: Must be at least 8 characters
+3. **Confirm Password**: Verify new password entry
+4. **Password Strength**: Real-time validation shows password strength
+5. **Submit**: Update your password
+
+**Security Notes**:
+
+- Passwords must be at least 8 characters long
+- Strong passwords are recommended (mix of letters, numbers, symbols)
+- Changing password will not log out active sessions immediately
+
+### Session Management
+
+View and monitor your active sessions:
+
+- **Active Sessions**: List of currently authenticated sessions
+- **Session Details**: Login time, device/browser information
+- **Session Security**: Review unusual or unexpected sessions
+
+For session management and security, see the [Security Guide](06-security.md).
 
 ---
 
@@ -101,6 +160,24 @@ Projects can be created in two ways:
 - **Search**: Use the search/filter box to find specific projects by name, tag, or hostname
 - **Status**: Visual indicators show project health and last update status
 - **Statistics**: View snapshot counts, vulnerability summaries, and last scan times
+- **Setup Workflow**: Streamlined agent deployment instructions for new projects
+
+### Project Setup
+
+For new projects, the setup page provides comprehensive deployment guidance:
+
+- **Agent Configuration**: Ready-to-use commands for container deployment
+- **Docker Instructions**: One-line Docker commands with pre-configured tokens
+- **Kubernetes Manifests**: Complete K8s deployment examples
+- **SBOM Upload**: Manual SBOM upload option for testing or manual workflows
+- **Token Management**: Automatic token retrieval for easy agent setup
+
+To access project setup:
+
+1. Navigate to your project
+2. Click the "Setup" tab or visit `/projects/{id}/setup`
+3. Choose your deployment method (Docker, Kubernetes, or manual upload)
+4. Copy and execute the provided commands
 
 ---
 
@@ -118,10 +195,26 @@ Snapshots represent the state of a container or system at a specific time:
 
 Click on any snapshot to access detailed information:
 
-- **Dependencies**: Complete list of packages, libraries, and components
+- **Dependencies**: Complete list of packages, libraries, and components with pagination
 - **Vulnerability Data**: Security scan results and risk assessments
 - **Metadata**: Scan tool information, timestamps, and container details
 - **Export Options**: Download SBOM data in various formats (JSON, XML)
+
+### Uploading SBOMs
+
+Projects can now accept manually uploaded SBOM files:
+
+- **Access**: Navigate to project setup page
+- **Supported Formats**: JSON and XML SBOM files (CycloneDX, SPDX)
+- **Use Cases**:
+  - Manual snapshot creation from external scans
+  - Import historical SBOM data
+  - Testing and validation workflows
+- **Process**:
+  1. Click "Upload SBOM" button on the project setup page
+  2. Select your SBOM file (JSON or XML format)
+  3. Confirm upload to create a new snapshot
+  4. View the processed snapshot with dependencies and vulnerabilities
 
 ### SBOM Standards
 
@@ -130,6 +223,18 @@ Konarr uses industry-standard SBOM formats:
 - **CycloneDX**: Primary format for SBOM generation and storage
 - **SPDX**: Alternative format support
 - **Tool Integration**: Works with Syft, Grype, Trivy, and other scanning tools
+
+### Dependency Navigation
+
+Browse and search through project dependencies:
+
+- **Pagination**: Navigate through large dependency lists efficiently
+- **URL Persistence**: Page numbers are preserved in the URL for bookmarking
+- **Search Functionality**: Filter dependencies by name or package identifier
+- **Details View**: Click any dependency to view detailed information
+- **Vulnerability Mapping**: See which dependencies have known vulnerabilities
+
+The pagination feature automatically updates the URL with the current page, making it easy to share specific dependency views with team members.
 
 ---
 
@@ -165,11 +270,17 @@ Each alert provides comprehensive information:
 
 ### User Management
 
-Admin users can manage system access:
+Admin users can manage system access with an enhanced interface:
 
-- **User Accounts**: Create and manage user accounts
+- **User Accounts**: Create and manage user accounts with improved UI
 - **Role Assignment**: Assign admin or standard user privileges
+- **Status Management**: Activate, deactivate, or suspend user accounts
+- **User Search**: Find users quickly with search and filtering
+- **Pagination**: Navigate through large user lists efficiently
 - **Session Management**: Monitor active sessions and access logs
+- **Bulk Operations**: Manage multiple users efficiently
+
+The updated admin interface provides better visibility and control over user accounts, with real-time statistics showing total, active, and inactive user counts.
 
 ### Agent Token Management
 
@@ -197,21 +308,24 @@ Access server-level settings:
 1. **Start Server**: Launch Konarr server and access web interface
 2. **Admin Login**: Log in with admin credentials
 3. **Configure Settings**: Set up agent tokens and server configuration
-4. **Agent Setup**: Configure and deploy agents to monitor containers
+4. **Setup Profile**: Optionally configure your user profile and password
+5. **Agent Setup**: Configure and deploy agents to monitor containers or upload SBOMs manually
 
 ### Daily Operations
 
 1. **Monitor Projects**: Review project status and recent snapshots
-2. **Review Alerts**: Triage new security vulnerabilities
-3. **Investigate Issues**: Drill down into specific snapshots and dependencies
-4. **Take Action**: Update containers, acknowledge alerts, or escalate issues
+2. **Browse Dependencies**: Navigate through dependency lists with pagination
+3. **Review Alerts**: Triage new security vulnerabilities
+4. **Investigate Issues**: Drill down into specific snapshots and dependencies
+5. **Take Action**: Update containers, acknowledge alerts, or escalate issues
 
 ### Ongoing Management
 
 1. **Trend Analysis**: Monitor security trends across projects
 2. **Compliance Reporting**: Export SBOMs for compliance requirements
 3. **System Maintenance**: Review server health and performance metrics
-4. **User Management**: Manage access and permissions as team grows
+4. **User Management**: Manage access and permissions as team grows (admin only)
+5. **Profile Updates**: Keep passwords current and review active sessions
 
 ---
 
@@ -222,6 +336,7 @@ Access server-level settings:
 - **Global Search**: Use the search box on Projects and Snapshots pages
 - **Filter Options**: Filter by project type, status, severity, or date ranges
 - **Quick Access**: Bookmark frequently accessed projects for easy navigation
+- **URL Parameters**: Pagination states are preserved in URLs for sharing
 
 ### Keyboard Shortcuts
 
@@ -232,6 +347,7 @@ Access server-level settings:
 ### Performance Optimization
 
 - **Pagination**: Large datasets are automatically paginated for performance
+- **URL Sync**: Page numbers persist in URLs for seamless navigation
 - **Lazy Loading**: Detailed data loads on-demand when viewing specific items
 - **Caching**: Web interface caches frequently accessed data
 
@@ -304,6 +420,7 @@ For more troubleshooting information:
 
 After familiarizing yourself with the web interface:
 
+- **[User Profile](#user-profile-management)** - Manage your account and password settings
 - **[CLI Usage](03-usage-cli.md)** - Learn about command-line operations
 - **[API Documentation](05-api.md)** - Integrate with external systems
 - **[Security Guide](06-security.md)** - Implement production security practices
