@@ -129,7 +129,7 @@ The first registered user automatically receives the Admin role.
 
 | Endpoint | Method | Authentication | Description |
 |----------|--------|----------------|-------------|
-| `/api/ws?agent` | WS | Session | Agent status monitoring |
+| `/api/ws?agent` | GET (WebSocket) | Session | Agent status monitoring |
 
 ## Core Endpoints
 
