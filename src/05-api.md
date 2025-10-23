@@ -52,6 +52,85 @@ Admin-only endpoints require both:
 
 The first registered user automatically receives the Admin role.
 
+## Quick Reference
+
+### Endpoint Summary
+
+#### Base & Health Endpoints
+
+| Endpoint | Method | Authentication | Description |
+|----------|--------|----------------|-------------|
+| `/api/` | GET | Optional | Server status and statistics |
+| `/api/health` | GET | None | Health check |
+
+#### Authentication Endpoints
+
+| Endpoint | Method | Authentication | Description |
+|----------|--------|----------------|-------------|
+| `/api/auth/login` | POST | None | User login |
+| `/api/auth/logout` | POST | Session | User logout |
+| `/api/auth/register` | POST | None | User registration |
+
+#### Project Endpoints
+
+| Endpoint | Method | Authentication | Description |
+|----------|--------|----------------|-------------|
+| `/api/projects` | GET | Session/Agent | List projects |
+| `/api/projects` | POST | Session/Agent | Create project |
+| `/api/projects/{id}` | GET | Session | Get project details |
+| `/api/projects/{id}` | PATCH | Session | Update project |
+| `/api/projects/{id}` | DELETE | Admin | Archive project |
+
+#### Snapshot Endpoints
+
+| Endpoint | Method | Authentication | Description |
+|----------|--------|----------------|-------------|
+| `/api/snapshots` | GET | Session | List snapshots |
+| `/api/snapshots` | POST | Session | Create snapshot |
+| `/api/snapshots/{id}` | GET | Session | Get snapshot details |
+| `/api/snapshots/{id}/bom` | POST | Session | Upload SBOM |
+| `/api/snapshots/{id}/metadata` | PATCH | Session | Update metadata |
+| `/api/snapshots/{id}/dependencies` | GET | Session | List snapshot dependencies |
+| `/api/snapshots/{id}/alerts` | GET | Session | List snapshot alerts |
+
+#### Dependency Endpoints
+
+| Endpoint | Method | Authentication | Description |
+|----------|--------|----------------|-------------|
+| `/api/dependencies` | GET | Session | List dependencies |
+| `/api/dependencies/{id}` | GET | Session | Get dependency details |
+
+#### Security Alert Endpoints
+
+| Endpoint | Method | Authentication | Description |
+|----------|--------|----------------|-------------|
+| `/api/security` | GET | Session | List security alerts |
+| `/api/security/{id}` | GET | Session | Get alert details |
+
+#### User Management Endpoints
+
+| Endpoint | Method | Authentication | Description |
+|----------|--------|----------------|-------------|
+| `/api/user/whoami` | GET | Session | Get current user |
+| `/api/user/password` | PATCH | Session | Update password |
+| `/api/user/sessions` | GET | Session | List user sessions |
+| `/api/user/sessions/{id}` | DELETE | Session | Revoke session |
+
+#### Admin Endpoints
+
+| Endpoint | Method | Authentication | Description |
+|----------|--------|----------------|-------------|
+| `/api/admin` | GET | Admin | Get admin settings |
+| `/api/admin` | PATCH | Admin | Update settings |
+| `/api/admin/users` | GET | Admin | List all users |
+| `/api/admin/users/{id}` | PATCH | Admin | Update user |
+
+#### WebSocket Endpoint
+
+| Endpoint | Method | Authentication | Description |
+|----------|--------|----------------|-------------|
+| `/api/ws?agent` | WS | Session | Agent status monitoring |
+
 ## Core Endpoints
 
 ### Base Information
@@ -377,7 +456,7 @@ curl http://localhost:9000/api/health
 
 When a client connects and sends a project ID, the snapshot for that project is marked as "online". When the connection closes, it's marked as "offline".
 
-## Authentication Endpoints
+## Authentication API Details
 
 ### Login
 
