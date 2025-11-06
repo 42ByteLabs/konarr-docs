@@ -2,6 +2,8 @@
 
 Projects are logical groups representing hosts, applications, or container clusters for monitoring and analysis.
 
+**Implementation**: Projects are managed through the [Projects API](https://github.com/42ByteLabs/konarr/blob/main/server/src/api/projects.rs) (backend) and rendered in the [Projects Views](https://github.com/42ByteLabs/konarr-client/tree/main/src/views/projects) (frontend). The [Project model](https://github.com/42ByteLabs/konarr/tree/main/src/models/projects) defines the database schema and business logic.
+
 ## Managing Projects
 
 ### Creating Projects

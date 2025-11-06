@@ -2,6 +2,8 @@
 
 The Konarr Agent (`konarr-cli`) is a powerful Rust-based command-line tool that monitors containers, generates Software Bill of Materials (SBOMs), and uploads security data to the Konarr server. This section provides comprehensive guidance for configuring and deploying agents in various environments.
 
+**Implementation**: The agent CLI is implemented in [cli/src](https://github.com/42ByteLabs/konarr/tree/main/cli/src) with agent-specific functionality in [cli/src/cli/agent.rs](https://github.com/42ByteLabs/konarr/blob/main/cli/src/cli/agent.rs). Configuration is managed through [src/utils/config/client.rs](https://github.com/42ByteLabs/konarr/blob/main/src/utils/config/client.rs).
+
 ---
 
 ## Agent Overview

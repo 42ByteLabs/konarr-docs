@@ -21,12 +21,12 @@ Konarr is a blazing fast, lightweight web interface for monitoring your servers,
 
 Konarr follows a simple server + agent architecture:
 
-- **Server**: Built with [Rust](https://www.rust-lang.org/) and the [Rocket](https://rocket.rs/) framework
-  - Provides REST API and web UI  
-  - Uses [SQLite](https://www.sqlite.org/) for lightweight data storage ([GeekORM](https://github.com/42ByteLabs/GeekORM) for database operations)
-  - Stores server settings including agent authentication keys
-  - Serves frontend built with [Vue.js](https://vuejs.org/) and [TypeScript](https://www.typescriptlang.org/)
-  - Default port: 9000
+- **Server**: Built with [Rust](https://www.rust-lang.org/) and the [Rocket](https://rocket.rs/) framework ([source](https://github.com/42ByteLabs/konarr/tree/main/server))
+  - Provides [REST API](https://github.com/42ByteLabs/konarr/tree/main/server/src/api) and web UI  
+  - Uses [SQLite](https://www.sqlite.org/) for lightweight data storage ([GeekORM](https://github.com/42ByteLabs/GeekORM) for [database operations](https://github.com/42ByteLabs/konarr/tree/main/src/models))
+  - Stores [server settings](https://github.com/42ByteLabs/konarr/blob/main/src/models/settings/mod.rs) including agent authentication keys
+  - Serves frontend built with [Vue.js](https://vuejs.org/) and [TypeScript](https://www.typescriptlang.org/) ([frontend source](https://github.com/42ByteLabs/konarr-client))
+  - Default port: 9000 ([configuration](https://github.com/42ByteLabs/konarr/blob/main/src/utils/config/server.rs))
 
 - **Agent / CLI**: [Rust](https://www.rust-lang.org/)-based CLI (`konarr-cli`) that:
   - Runs in monitoring mode (watches [Docker](https://www.docker.com/) socket for container events)
@@ -49,14 +49,14 @@ Konarr is built with modern, high-performance technologies:
 
 **Backend:**
 
-- **[Rust](https://www.rust-lang.org/)** using [Rocket](https://rocket.rs/) framework for the web server
-- **[GeekORM](https://github.com/42ByteLabs/GeekORM)** for database operations and [SQLite](https://www.sqlite.org/) integration
-- **[Figment](https://github.com/SergioBenitez/Figment)** for configuration management
+- **[Rust](https://www.rust-lang.org/)** using [Rocket](https://rocket.rs/) framework for the web server ([main entry point](https://github.com/42ByteLabs/konarr/blob/main/server/src/main.rs))
+- **[GeekORM](https://github.com/42ByteLabs/GeekORM)** for [database operations](https://github.com/42ByteLabs/konarr/tree/main/src/models) and [SQLite](https://www.sqlite.org/) integration
+- **[Figment](https://github.com/SergioBenitez/Figment)** for [configuration management](https://github.com/42ByteLabs/konarr/blob/main/src/utils/config/config.rs)
 - **[Tokio](https://tokio.rs/)** for asynchronous runtime
 
 **Frontend:**
 
-- **[Vue.js 3](https://vuejs.org/)** with [TypeScript](https://www.typescriptlang.org/) for reactive UI
+- **[Vue.js 3](https://vuejs.org/)** with [TypeScript](https://www.typescriptlang.org/) for reactive UI ([views](https://github.com/42ByteLabs/konarr-client/tree/main/src/views), [components](https://github.com/42ByteLabs/konarr-client/tree/main/src/components))
 - **[Tailwind CSS](https://tailwindcss.com/)** for responsive styling
 - **[Vite](https://vitejs.dev/)** for fast development and building
 - **[Material Design Icons (MDI)](https://materialdesignicons.com/)** and [Heroicons](https://heroicons.com/) for UI icons
@@ -70,9 +70,9 @@ Konarr is built with modern, high-performance technologies:
 
 **Security & Standards:**
 
-- **[CycloneDX](https://cyclonedx.org/)** (v1.5 and v1.6) for SBOM format compliance
-- **Session-based authentication** for web UI
-- **Bearer token authentication** for agents
+- **[CycloneDX](https://cyclonedx.org/)** (v1.5 and v1.6) for SBOM format compliance ([SBOM processing](https://github.com/42ByteLabs/konarr/blob/main/src/models/dependencies/snapshots/sboms.rs))
+- **Session-based authentication** for web UI ([auth endpoints](https://github.com/42ByteLabs/konarr/blob/main/server/src/api/auth.rs))
+- **Bearer token authentication** for agents ([auth guards](https://github.com/42ByteLabs/konarr/tree/main/server/src/guards))
 - **CORS support** for API access
 
 **Container & Deployment:**

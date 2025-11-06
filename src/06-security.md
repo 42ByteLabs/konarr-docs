@@ -2,6 +2,8 @@
 
 This page describes Konarr's security model, threat considerations, and comprehensive recommendations for secure production deployments.
 
+**Security Implementation**: Authentication is implemented in [server/src/guards](https://github.com/42ByteLabs/konarr/tree/main/server/src/guards) with user authentication in [models/auth](https://github.com/42ByteLabs/konarr/tree/main/src/models/auth). Session management uses HTTP-only cookies for security.
+
 ## Overview
 
 Konarr handles sensitive supply chain data including:

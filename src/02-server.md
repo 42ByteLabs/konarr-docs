@@ -2,6 +2,8 @@
 
 The Konarr server is the central component providing the REST API, web interface, and data storage. It's built with Rust using the Rocket framework and stores data in SQLite by default.
 
+**Server Implementation**: The server is implemented in [server/src/main.rs](https://github.com/42ByteLabs/konarr/blob/main/server/src/main.rs) with API routes in [server/src/api](https://github.com/42ByteLabs/konarr/tree/main/server/src/api) and data models in [src/models](https://github.com/42ByteLabs/konarr/tree/main/src/models).
+
 ## Installation Methods
 
 ### Docker (Recommended)

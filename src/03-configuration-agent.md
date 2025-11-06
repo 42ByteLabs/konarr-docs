@@ -2,6 +2,8 @@
 
 This page documents comprehensive agent-specific configuration options, environment variables, deployment scenarios, and security considerations.
 
+**Configuration Implementation**: Agent configuration is defined in [src/utils/config/client.rs](https://github.com/42ByteLabs/konarr/blob/main/src/utils/config/client.rs) and processed using Figment for flexible configuration management.
+
 ## Core Agent Settings
 
 ### Project Management

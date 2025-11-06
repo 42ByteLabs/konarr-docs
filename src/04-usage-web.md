@@ -2,6 +2,8 @@
 
 This guide covers how to use the Konarr web interface to monitor your containers, view SBOMs, manage projects, and track security vulnerabilities.
 
+**Frontend Implementation**: The web interface is built with Vue.js 3 and TypeScript. Views are located in [src/views](https://github.com/42ByteLabs/konarr-client/tree/main/src/views) and components in [src/components](https://github.com/42ByteLabs/konarr-client/tree/main/src/components).
+
 ## Accessing the Web Interface
 
 ### Basic Access

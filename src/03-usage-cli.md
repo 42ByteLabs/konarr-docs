@@ -2,6 +2,8 @@
 
 This page documents common `konarr-cli` workflows and command-line operations.
 
+**CLI Implementation**: The CLI is implemented in [cli/src/main.rs](https://github.com/42ByteLabs/konarr/blob/main/cli/src/main.rs) with command handlers in [cli/src/cli](https://github.com/42ByteLabs/konarr/tree/main/cli/src/cli). Agent operations are in [cli/src/cli/agent.rs](https://github.com/42ByteLabs/konarr/blob/main/cli/src/cli/agent.rs).
+
 ## Global Options
 
 ### Configuration
