@@ -61,43 +61,27 @@ This page documents common `konarr-cli` workflows and command-line operations.
 
 ### Agent Operations
 
-#### Monitor Mode
+#### Monitor Containers
 
-Continuously monitor Docker containers for changes:
+Run the agent in monitoring mode to continuously watch Docker containers:
 
 ```bash
-konarr-cli agent monitor \
+konarr-cli agent \
   --instance http://your-server:9000 \
   --token <AGENT_TOKEN> \
-  --project <PROJECT_ID>
+  --docker-socket /var/run/docker.sock
 ```
 
-#### Daemon Mode
+This will:
 
-Run agent as a background service:
+- Monitor Docker socket for container events
+- Auto-create projects when `agent.create` is enabled
+- Generate SBOMs when containers start or change
+- Upload snapshots to the server
 
-```bash
-konarr-cli agent daemon \
-  --config /etc/konarr/konarr.yml \
-  --log-file /var/log/konarr-agent.log
-```
+#### Scan Specific Images
 
-### Snapshot Management
-
-#### Create Snapshot
-
-Generate and upload a single SBOM snapshot:
-
-```bash
-konarr-cli snapshot create \
-  --instance http://your-server:9000 \
-  --token <AGENT_TOKEN> \
-  --project <PROJECT_ID>
-```
-
-#### Container Image Analysis
-
-Analyze specific container images:
+Scan and analyze a specific container image:
 
 ```bash
 # Remote image
@@ -117,81 +101,24 @@ konarr-cli snapshot create \
 Analyze local directories or files:
 
 ```bash
-# Analyze current directory
-konarr-cli snapshot create \
-  --path . \
-  --project <PROJECT_ID>
+# Scan container image
+konarr-cli scan --image nginx:latest
 
-# Analyze specific directory
-konarr-cli snapshot create \
-  --path /opt/application \
-  --project <PROJECT_ID>
+# Save output to file
+konarr-cli scan --image alpine:latest --output sbom.json
 ```
 
 ### Tool Management
 
 #### List Available Tools
 
-Show installed security scanning tools:
+Show which security scanning tools are available:
 
 ```bash
-konarr-cli tools list
+konarr-cli scan --list
 ```
 
-Output example:
-
-```text
-Tool     Version    Status      Path
-syft     v0.96.0    Installed   /usr/local/bin/syft
-grype    v0.74.0    Installed   /usr/local/bin/grype
-trivy    v0.48.0    Missing     -
-```
-
-#### Install Tools
-
-Install missing security tools:
-
-```bash
-# Install specific tool
-konarr-cli tools install --tool syft
-
-# Install all missing tools
-konarr-cli tools install --all
-
-# Install to custom path
-konarr-cli tools install --tool grype --path /usr/local/toolcache
-```
-
-#### Check Tool Versions
-
-Verify tool versions and compatibility:
-
-```bash
-konarr-cli tools version
-```
-
-### Project Management
-
-#### List Projects
-
-Display available projects:
-
-```bash
-konarr-cli projects list \
-  --instance http://your-server:9000 \
-  --token <AGENT_TOKEN>
-```
-
-#### Create Project
-
-Create a new project:
-
-```bash
-konarr-cli projects create \
-  --name "my-application" \
-  --type container \
-  --description "Production web application"
-```
+This will display installed tools and their versions. The agent can automatically install missing tools when `agent.tool_auto_install` is enabled (see [Scanning Tools](03-tools.md)).
 
 ### User Management
 
@@ -270,7 +197,7 @@ tools:
 Run with configuration:
 
 ```bash
-konarr-cli --config /etc/konarr/konarr.yml agent monitor
+konarr-cli --config /etc/konarr/konarr.yml agent --docker-socket /var/run/docker.sock
 ```
 
 ### Environment Variables
@@ -280,81 +207,43 @@ Set defaults via environment:
 ```bash
 export KONARR_INSTANCE=https://konarr.company.com
 export KONARR_AGENT_TOKEN=your-secure-token
-export KONARR_AGENT_PROJECT_ID=123
 export KONARR_AGENT_MONITORING=true
-export KONARR_VERBOSE=true
 
 # Run with environment config
-konarr-cli agent monitor
+konarr-cli agent --docker-socket /var/run/docker.sock
 ```
 
 ### CI/CD Integration
 
-Use in continuous integration pipelines:
+Use in continuous integration pipelines to scan container images:
 
 ```bash
-# Build-time analysis
-konarr-cli snapshot create \
+# Scan container image in CI pipeline
+konarr-cli scan \
   --image $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA \
-  --project $KONARR_PROJECT_ID \
-  --fail-on-critical \
-  --output json > security-report.json
+  --output security-report.json
 
-# Check exit code
-if [ $? -ne 0 ]; then
-  echo "Critical vulnerabilities found, failing build"
-  exit 1
-fi
-```
-
-### Security Scanning Options
-
-Configure vulnerability scanning behavior:
-
-```bash
-# Fail on high/critical vulnerabilities
-konarr-cli snapshot create \
-  --project <PROJECT_ID> \
-  --fail-on-critical \
-  --fail-on-high
-
-# Custom severity threshold
-konarr-cli snapshot create \
-  --project <PROJECT_ID> \
-  --max-severity medium
-
-# Skip vulnerability scanning
-konarr-cli snapshot create \
-  --project <PROJECT_ID> \
-  --skip-vulnerability-scan
+# Upload SBOM to Konarr server
+konarr-cli upload-sbom \
+  --input security-report.json
 ```
 
 ## Troubleshooting
 
 ### Debug Mode
 
-Enable verbose logging for troubleshooting:
+Enable debug logging for troubleshooting:
 
 ```bash
-konarr-cli --verbose agent monitor
-```
-
-### Connection Testing
-
-Test server connectivity:
-
-```bash
-konarr-cli health \
-  --instance http://your-server:9000
+konarr-cli --debug agent --docker-socket /var/run/docker.sock
 ```
 
 ### Tool Verification
 
-Verify scanner tools are working:
+Check which scanner tools are available:
 
 ```bash
-konarr-cli tools test --tool syft
-konarr-cli tools test --all
+konarr-cli scan --list
 ```
 
 ### Log Analysis
@@ -362,24 +251,11 @@ konarr-cli tools test --all
 Check agent logs for issues:
 
 ```bash
-# View recent logs
-journalctl -u konarr-agent -f
-
 # Container logs
 docker logs -f konarr-agent
 ```
 
-The agent watches container lifecycle events (when configured) and uploads snapshots automatically. Use `--config` to provide persistent configuration.
-
-## Tooling and debugging
-
-- To list available scanner tools and their paths:
-
-```bash
-konarr-cli tools list
-```
-
-- Enable verbose logging for troubleshooting (check `konarr-cli --help` for a `--verbose` or `-v` flag).
+### Getting Help
 
 For complete CLI reference, use the built-in help:
 
@@ -387,4 +263,6 @@ For complete CLI reference, use the built-in help:
 konarr-cli --help
 konarr-cli agent --help
 konarr-cli scan --help
+konarr-cli upload-sbom --help
+konarr-cli database --help
 ```

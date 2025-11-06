@@ -75,47 +75,34 @@ RUN curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | 
 
 ## Configuration
 
-### Environment Variables
+### Quick Configuration
 
-The agent supports configuration via environment variables with `KONARR_AGENT_` prefix:
+The agent requires minimal configuration to get started:
+
+**Environment Variables:**
 
 ```bash
-# Core settings
+# Required settings
 export KONARR_INSTANCE="http://konarr.example.com:9000"
 export KONARR_AGENT_TOKEN="your-agent-token"
-export KONARR_AGENT_PROJECT_ID="project-123"
 
-# Monitoring settings
+# Optional - enable monitoring mode
 export KONARR_AGENT_MONITORING=true
 export KONARR_AGENT_AUTO_CREATE=true
-export KONARR_AGENT_HOST="production-server-01"
-
-# Tool management
-export KONARR_AGENT_TOOL="syft"  # or "grype", "trivy"
-export KONARR_AGENT_TOOL_AUTO_INSTALL=true
-export KONARR_AGENT_TOOL_AUTO_UPDATE=true
-
-# Docker settings
-export KONARR_AGENT_DOCKER_SOCKET="/var/run/docker.sock"
 ```
 
-### Configuration File
-
-Create `konarr.yml` for persistent settings:
+**Configuration File (`konarr.yml`):**
 
 ```yaml
 agent:
   project_id: "my-project"
   create: true           # Auto-create projects
   monitoring: true       # Watch Docker events
-  host: "server-01"      # Friendly host name
-  
-  # Tool configuration
   tool: "syft"          # Primary SBOM tool
   tool_auto_install: true
-  tool_auto_update: true
-  docker_socket: "/var/run/docker.sock"
 ```
+
+For comprehensive configuration options, security settings, and production deployment examples, see [Agent Configuration Details](03-configuration-agent.md).
 
 ### CLI Commands
 
@@ -157,46 +144,23 @@ konarr-cli tools list
 
 ## Scanning Tools
 
-The agent uses external tools for SBOM generation and vulnerability scanning:
+The agent uses external scanning tools for SBOM generation and vulnerability detection. Three tools are supported:
 
-### Supported Tools
+- **[Syft](https://github.com/anchore/syft)** - Primary SBOM generation tool
+- **[Grype](https://github.com/anchore/grype)** - Vulnerability scanning
+- **[Trivy](https://github.com/aquasecurity/trivy)** - Comprehensive security scanning
 
-| Tool | Purpose | Auto-Install | Package Managers |
-|------|---------|--------------|------------------|
-| **Syft** | SBOM Generation | ✅ | NPM, Cargo, Deb, RPM, PyPI, Maven, Go |
-| **Grype** | Vulnerability Scanning | ✅ | All Syft-supported formats |
-| **Trivy** | Security Scanning | ✅ | Multi-format vulnerability detection |
-
-### Tool Installation
-
-The agent can automatically install tools:
+The agent can automatically install these tools when needed:
 
 ```bash
 # Enable auto-install (default in container images)
 export KONARR_AGENT_TOOL_AUTO_INSTALL=true
 
-# Manual tool installation
+# Or manually install specific tools
 konarr-cli tools install syft
-konarr-cli tools install grype  
-konarr-cli tools install trivy
 ```
 
-**Tool Storage Locations:**
-
-- Container: `/usr/local/toolcache/`
-- Host install: `~/.local/bin/` or `/usr/local/bin/`
-- Custom: Set via `KONARR_AGENT_TOOLCACHE_PATH`
-
-### Tool Configuration
-
-```yaml
-# Custom tool settings
-agent:
-  tool: "syft"                                    # Primary tool
-  tool_auto_install: true                         # Auto-install missing tools
-  tool_auto_update: false                         # Auto-update tools
-  toolcache_path: "/usr/local/toolcache"         # Tool storage location
-```
+For detailed information about each tool, installation options, and configuration, see [Scanning Tools](03-tools.md).
 
 ## Project Management
 
