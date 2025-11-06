@@ -11,8 +11,8 @@ Konarr is a blazing fast, lightweight web interface for monitoring your servers,
   - [Grype](https://github.com/anchore/grype) and [Trivy](https://github.com/aquasecurity/trivy) for vulnerability scanning
 - **Orchestration support** for:
   - [Docker](https://www.docker.com/) / [Podman](https://podman.io/)
-  - [Docker Compose](https://docs.docker.com/compose/) / [Docker Swarm](https://docs.docker.com/engine/swarm/)
-  - [Kubernetes](https://kubernetes.io/) support (planned 🚧)
+  - [Docker Compose](https://docs.docker.com/compose/)
+  - Deployable on [Kubernetes](https://kubernetes.io/)
 - **Software Bill of Materials (SBOM)** generation and management for containers
 - **Supply chain attack monitoring** (in development 🚧)
 - **[CycloneDX](https://cyclonedx.org/) support** (v1.5 and v1.6) for SBOM formats
@@ -79,7 +79,7 @@ Konarr is built with modern, high-performance technologies:
 
 - **[Docker](https://www.docker.com/)** and **[Podman](https://podman.io/)** support
 - **[Docker Compose](https://docs.docker.com/compose/)** configurations
-- **[Kubernetes](https://kubernetes.io/)** support (planned)
+- Deployable on **[Kubernetes](https://kubernetes.io/)**
 - **Multi-architecture** container images (x86_64, ARM64)
 
 ## Quick Links
@@ -88,8 +88,6 @@ Konarr is built with modern, high-performance technologies:
 - [Server Setup](02-server.md)
 - [Agent Setup](02-agent.md)
 - [Configuration & Usage](03-configuration.md)
-- [API Documentation](05-api.md)
-- [Security](06-security.md)
 - [API Documentation](05-api.md)
 - [Security](06-security.md)
 

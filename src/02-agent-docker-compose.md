@@ -40,4 +40,9 @@ docker compose -f docker-compose-agent.yml pull konarr-agent
 docker compose -f docker-compose-agent.yml up -d --no-deps --build konarr-agent
 ```
 
-If you'd like, I can add a Kubernetes DaemonSet example for distributing agents across a cluster.
+---
+
+**See Also:**
+
+- [Kubernetes Deployment](./02-server-kubernetes.md) - Deploy agents across a Kubernetes cluster
+- [Agent Configuration](./03-configuration-agent.md) - Detailed agent configuration options

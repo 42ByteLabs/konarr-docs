@@ -381,4 +381,10 @@ konarr-cli tools list
 
 - Enable verbose logging for troubleshooting (check `konarr-cli --help` for a `--verbose` or `-v` flag).
 
-If you'd like, I can expand this into a full reference for all `konarr-cli` flags and subcommands by parsing the CLI code or the help output.
+For complete CLI reference, use the built-in help:
+
+```bash
+konarr-cli --help
+konarr-cli agent --help
+konarr-cli scan --help
+```

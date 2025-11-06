@@ -91,7 +91,7 @@ This creates:
 
 - Default config: `config/konarr.yml`
 - SQLite database: `data/konarr.db`
-- Server on port 8000 (development) or 9000 (production/release)
+- Server on port 9000 (default for all modes)
 
 ## Configuration
 

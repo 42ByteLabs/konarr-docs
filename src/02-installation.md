@@ -105,10 +105,8 @@ Common troubleshooting
 
 ---
 
-Need more?
+**Next Steps:**
 
-If you'd like, I can also:
-
-- Add a ready-to-use `docker-compose.yml` snippet to the server page.
-- Add an API example to find/create a Project ID.
-- Add example `konarr.yml` snippets for common production deployments.
+- [Server Configuration](03-configuration-server.md) - Detailed server configuration options
+- [Agent Configuration](03-configuration-agent.md) - Detailed agent configuration options
+- [Docker Compose Setup](02-server-docker-compose.md) - Complete multi-container setup
