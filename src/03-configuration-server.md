@@ -225,4 +225,10 @@ The project's config merging uses Figment, which supports nesting via separators
 - Mount a host directory under `/data` in container deployments to persist the SQLite DB (`data/konarr.db`).
 - Regularly back up the DB file before upgrades: `cp data/konarr.db data/konarr.db.bak`.
 
-If you'd like, I can generate a full `konarr.yml` reference by inspecting the server config structs in the codebase.
+---
+
+**Additional Resources:**
+
+- [Server Installation](./02-server.md) - Server deployment methods
+- [Reverse Proxy Setup](./02-server-reverse-proxy.md) - Production proxy configuration
+- [Security](./06-security.md) - Security best practices

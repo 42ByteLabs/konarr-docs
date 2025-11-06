@@ -64,4 +64,9 @@ docker compose logs -f konarr
 - Use a reverse proxy or load balancer in front of the service for TLS termination in production.
 - For security, protect the `config` and `data` directories and do not expose the database file to untrusted users.
 
-If you'd like, I can add an example `docker-compose` with an Nginx reverse-proxy configured for TLS termination (Let's Encrypt) and an accompanying `nginx` config example.
+---
+
+**See Also:**
+
+- [Reverse Proxy Setup](./02-server-reverse-proxy.md) - Nginx and other reverse proxy examples with TLS
+- [Security](./06-security.md) - Security best practices and recommendations

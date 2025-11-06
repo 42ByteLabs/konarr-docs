@@ -261,4 +261,9 @@ export KONARR_AGENT_TOKEN=your-token-here
 - The agent will look for `syft`, `grype`, or `trivy` on `PATH` and in `agent.toolcache_path`.
 - For secure environments, pre-install approved tool versions into `agent.toolcache_path` and set `agent.tool_auto_install` to `false`.
 
-If you'd like, I can add a short Kubernetes manifest to demonstrate setting these env vars in a Pod spec.
+---
+
+**See Also:**
+
+- [Kubernetes Deployment](./02-server-kubernetes.md) - Deploy and configure agents on Kubernetes
+- [Scanning Tools](./03-tools.md) - Detailed information about scanning tools
