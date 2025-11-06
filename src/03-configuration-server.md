@@ -2,6 +2,8 @@
 
 This page documents comprehensive server-specific configuration options, environment variable mappings, and production deployment examples.
 
+**Configuration Implementation**: Server configuration is managed through Figment and defined in [src/utils/config/server.rs](https://github.com/42ByteLabs/konarr/blob/main/src/utils/config/server.rs) and [src/utils/config/config.rs](https://github.com/42ByteLabs/konarr/blob/main/src/utils/config/config.rs).
+
 ---
 
 ## Core Server Settings

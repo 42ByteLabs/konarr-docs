@@ -2,6 +2,8 @@
 
 View and manage Software Bill of Materials (SBOM) data and dependency information.
 
+**Implementation**: Dependencies are managed through the [Dependencies API](https://github.com/42ByteLabs/konarr/blob/main/server/src/api/dependencies.rs) (backend) and [Snapshots API](https://github.com/42ByteLabs/konarr/blob/main/server/src/api/snapshots.rs). Frontend views are in [Dependencies Views](https://github.com/42ByteLabs/konarr-client/tree/main/src/views/dependencies). SBOM processing is handled by [snapshots/sboms.rs](https://github.com/42ByteLabs/konarr/blob/main/src/models/dependencies/snapshots/sboms.rs).
+
 ## Understanding Snapshots
 
 Snapshots capture the state of a container or system at a specific time, including SBOM data, dependencies, vulnerabilities, and scan metadata.

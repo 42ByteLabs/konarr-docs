@@ -2,6 +2,8 @@
 
 Manage security alerts and vulnerabilities detected in your projects.
 
+**Implementation**: Security alerts are managed through the [Security API](https://github.com/42ByteLabs/konarr/blob/main/server/src/api/security.rs) (backend) and rendered in [Security Views](https://github.com/42ByteLabs/konarr-client/tree/main/src/views/security) (frontend). The [Security model](https://github.com/42ByteLabs/konarr/tree/main/src/models/security) defines alert and advisory data structures.
+
 ## Alert Overview
 
 Alerts are automatically generated from vulnerability scans (Grype, Trivy) when agents scan containers or SBOMs are uploaded.

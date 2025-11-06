@@ -2,6 +2,8 @@
 
 Konarr uses industry-standard security scanning tools to generate Software Bill of Materials (SBOM) and detect vulnerabilities in container images. The agent supports multiple tools, each with specific capabilities and features.
 
+**Implementation**: Tool integration is implemented in [src/tools](https://github.com/42ByteLabs/konarr/tree/main/src/tools) with specific implementations for [Syft](https://github.com/42ByteLabs/konarr/blob/main/src/tools/syft.rs), [Grype](https://github.com/42ByteLabs/konarr/blob/main/src/tools/grype.rs), and [Trivy](https://github.com/42ByteLabs/konarr/blob/main/src/tools/trivy.rs). The tool catalogue system is in [src/utils/catalogue](https://github.com/42ByteLabs/konarr/tree/main/src/utils/catalogue).
+
 ## Supported Tools
 
 Konarr supports three primary scanning tools:
